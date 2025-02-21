@@ -29,6 +29,7 @@
 #define PIN_CH2     4     // Channel 2 GPIO on Laskakit microESP board with MOSFET Shield
 #define PIN_SDA     8    // SDA pin for I2C
 #define PIN_SCL     10    // SCL pin for I2C
+
 #else
   #error "Board not defined!"
 #endif
@@ -218,8 +219,7 @@ bool createHttpRequest(WiFiClient &client, bool &connStatus, bool checkTimestamp
         if (!checkTimestamp) return false;
         delay(500);
       }
-      if (!checkTimestamp) 
-        delay(200);
+      if (!checkTimestamp) delay(200);
     }
   }
 
@@ -447,6 +447,10 @@ void setup() {
   // Deep sleep mode
   Serial.print("Going to sleep now for (minutes): ");
   Serial.println(deepSleepTime);
+
+  esp_sleep_enable_timer_wakeup(deepSleepTime * 60 * 1000000);
+  delay(100);
+  esp_deep_sleep_start();
 }
 
 void loop() {}
