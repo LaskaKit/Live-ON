@@ -1,18 +1,18 @@
-# Live ON - (Živý Obraz) bez ePaperu
+# Live ON - (ZivyObraz project for ePaper display) without ePaper display
+The ZivyObraz project, one FW for all ePaper dipleys and in the web service environment you can design your own look and feel and the extras you want to display on your ePaper display.
+But we needed something a little bit different - firmware that queries the ZivyObraz server, finds the deep-sleep value, then executes the code and goes back to sleep and wakes up again in the time it found by querying ZivyObraz. And in addition, it also sends sensor data and battery voltage. And that's not all, microESP can switch up to 3 devices via GPIO (CH0 - GPIO7, CH1 - 1, CH2 - GPIO4).
 
-Kdo by neznal projekt Živý Obraz, jednotný FW pro všechny ePaper dipleje a ve webovém prostředí služby si pak navrhneš vlastní vzhled a doplňky, které chceš zobrazit na ePaper displeji.</br>
-My jsme ale potřebovali něco trochu jiného - firmware, který se dotáže na server ŽivýObraz, zjistí hodnotu deep-sleep, tedy časový údaj za jak dlouho se má deska opět probudit, poté provede daný kód a opět se uspí a probudí za čas, který zjistil dotazem na ŽivýObraz. A kromě toho také pošle data z čidel a napětí baterie. A to není všechno, microESP může spínat až 3 zařízení přes GPIO (CH0 - GPIO7, CH1 - 1, CH2 - GPIO4).</br>
-</br>
-A o tom je právě námi upravený FW. Odeslání naměřených hodnot z připojeného čidla, možnosti řídit externí obvod-zařízení, měřit napětí připojené baterie a zjištění, za jak dlouho se má čip opět probudit, změřit a odeslat data.</br>
-</br>
-Po nahrání FW do ESP32-C3 desky (v našem kódu microESP) se spustí Wi-Fi AP - stejně jako původní projekt používáme WiFi manager (wifi heslo je zivyobraz). Po spuštění AP se na ESP32-C3 připojíš přes mobilní telefon, tablet nebo notebook a zadáš WiFi heslo a SSID vé domácí sítě. </br>
-Na zivyobraz.eu pak zadáš MAC adresu zařízení a microESP bude posílat teplotu, vlhkost, tlak nebo koncentraci CO2 na Živý Obraz - záleží na připojeném čidle, naměřené údaje pak můžeš využít jak je libo - třeba je zobrazit na ePaper displeji. Navíc kód může řídit až 3 další zařízení přes GPIO.</br>
-</br>
-Podporované senzory jsou:</br>
-SHT40 - teplota a vlhkost</br>
-BME280 - tlak, teplota a vlhkost</br>
-SCD41 - CO2, teplota, vlhkost</br>
-</br> 
-## Původní projekt
-* Základní informace najdete na webu projektu: https://zivyobraz.eu/
-* Konkrétní informace ohledně zprovoznění jsou v dokumentaci na adrese: https://wiki.zivyobraz.eu/
+And this is what our modified FW is all about. Sending measured values from the connected sensor, options to control external circuit-device, measure the voltage of the connected battery and determine how long it takes for the chip to wake up again, measure and send the data.
+
+After uploading the FW to the ESP32-C3 board (in our microESP code), the Wi-Fi AP is started - just like the original project we use a WiFi manager (the wifi password is zivyobraz). Once the AP is running, you connect to the ESP32-C3 via mobile phone, tablet or laptop and enter the WiFi password and SSID of your home network.
+Then you enter the MAC address of the device on zivyobraz.eu and the microESP will send the temperature, humidity, pressure or CO2 concentration to the ZivyObraz - depending on the connected sensor, you can then use the measured data as you wish - for example, display it on the ePaper display. In addition, the code can control up to 3 other devices via GPIO.
+
+Supported sensors are:
+SHT40 - temperature and humidity
+BME280 - pressure, temperature and humidity
+SCD41 - CO2, temperature, humidity
+
+
+## Original project
+* Basic information can be found on the project website: https://zivyobraz.eu/
+* For specific commissioning information, see the documentation at: https://wiki.zivyobraz.eu/
