@@ -90,21 +90,9 @@ void doTheThings() {
   // Add the main tasks here
   Serial.println("Performing the main tasks...");
 
-  for(int i = 0; i <= 2; i++){   
-    // changing the LED brightness with PWM
-    ledcWrite(0, 255);
-    delay(100);
-    ledcWrite(1, 255);
-    delay(100);
-    ledcWrite(2, 255);
-    delay(1000);
-    ledcWrite(0, 0);
-    delay(100);
-    ledcWrite(1, 0);
-    delay(100);
-    ledcWrite(2, 0);
-    delay(1000);
-  }
+  ledcWrite(2, 255);
+  delay(600);         // Motor runnig time
+  ledcWrite(2, 0);
 }
 
 const String getWifiSSID() {
@@ -400,7 +388,7 @@ bool checkForNewTimestampOnServer(WiFiClient &client) {
 void setup() {
   Serial.begin(115200);
   Serial.println("Starting firmware for Zivy Obraz service");
-
+  delay(1000);
   ledcSetup(0, 1000, 8);
   ledcAttachPin(PIN_CH0, 0);
   ledcSetup(1, 1000, 8);
