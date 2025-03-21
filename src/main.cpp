@@ -233,7 +233,7 @@ bool createHttpRequest(WiFiClient &client, bool &connStatus, bool checkTimestamp
 
   while (client.connected()) {
     String line = client.readStringUntil('\n');
-    Serial.println(line);
+    //Serial.println(line);
 
     if (checkTimestamp) {
       // If line starts with "Timestamp", put it into the timestamp variable
