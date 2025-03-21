@@ -91,7 +91,7 @@ void doTheThings() {
   Serial.println("Performing the main tasks...");
 
   ledcWrite(2, 255);
-  delay(600);         // Motor runnig time
+  delay(2000);         // Motor runnig time , 600
   ledcWrite(2, 0);
 }
 
@@ -233,7 +233,7 @@ bool createHttpRequest(WiFiClient &client, bool &connStatus, bool checkTimestamp
 
   while (client.connected()) {
     String line = client.readStringUntil('\n');
-    //Serial.println(line);
+    Serial.println(line);
 
     if (checkTimestamp) {
       // If line starts with "Timestamp", put it into the timestamp variable
