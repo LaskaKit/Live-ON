@@ -21,15 +21,31 @@
 /////////////////////////////////
 // Uncomment for correct board
 /////////////////////////////////
+
 #define microESP
+//#define ESP32_DevKit
+//#define ESP32S3_DevKit
 
 #ifdef microESP
-#define PIN_CH0     7     // Channel 0 GPIO on Laskakit microESP board with MOSFET Shield v1.1 and above
-#define PIN_CH1     1     // Channel 1 GPIO on Laskakit microESP board with MOSFET Shield 
-#define PIN_CH2     4     // Channel 2 GPIO on Laskakit microESP board with MOSFET Shield
-#define PIN_SDA     8    // SDA pin for I2C
-#define PIN_SCL     10    // SCL pin for I2C
+  #define PIN_CH0     7     // Channel 0 GPIO on Laskakit microESP board with MOSFET Shield v1.1 and above
+  #define PIN_CH1     1     // Channel 1 GPIO on Laskakit microESP board with MOSFET Shield 
+  #define PIN_CH2     4     // Channel 2 GPIO on Laskakit microESP board with MOSFET Shield
+  #define PIN_SDA     8     // SDA pin for I2C
+  #define PIN_SCL     10    // SCL pin for I2C
 
+#elif defined ESP32_DevKit
+  #define PIN_CH0     34    // Channel 0 GPIO on Laskakit TBD
+  #define PIN_CH1     35    // Channel 1 GPIO on Laskakit TBD
+  #define PIN_CH2     32    // Channel 2 GPIO on Laskakit TBD
+  #define PIN_SDA     21    // SDA pin for I2C
+  #define PIN_SCL     22    // SCL pin for I2C
+  
+#elif defined ESP32S3_DevKit
+  #define PIN_CH0     4     // Channel 0 GPIO on Laskakit TBD
+  #define PIN_CH1     5     // Channel 1 GPIO on Laskakit TBD
+  #define PIN_CH2     6     // Channel 2 GPIO on Laskakit TBD
+  #define PIN_SDA     42    // SDA pin for I2C
+  #define PIN_SCL     2     // SCL pin for I2C
 #else
   #error "Board not defined!"
 #endif
@@ -91,7 +107,7 @@ void doTheThings() {
   Serial.println("Performing the main tasks...");
 
   ledcWrite(2, 255);
-  delay(2000);         // Motor runnig time , 600
+  delay(1000);         // Motor runnig time, 600 for Air Wick
   ledcWrite(2, 0);
 }
 
