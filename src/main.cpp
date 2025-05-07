@@ -5,8 +5,18 @@
  * 
  * Default password for Wi-Fi AP is: zivyobraz
  * 
- * Code forked from:<
- * https://github.com/MultiTricker/zivyobraz-fw
+ * Zivyobraz.eu setting: 
+ *  1. Add gallery:
+ *    * Set any name, for example "Air Wick"
+ *    * Set any resolution, for example "200x200"
+ *    * Set Interval after which ePaper should re-verify a new image on the server, for example "30min"
+ *  2. Add epaper to your account
+ *    * Set any resolution, for example "200x200"
+ *    * Choose the gallery you created in step 1
+ *    * Set Schedule - Active and choose the time when you want to turn on the device
+ * 
+ * Board will wake up in the time you set in the schedule and first thing it will do is run doTheThings()
+ *  Change it to what you want to do.
  * 
  * Libraries:
  * WiFi manager by tzapu https://github.com/tzapu/WiFiManager
@@ -107,7 +117,7 @@ void doTheThings() {
   Serial.println("Performing the main tasks...");
 
   ledcWrite(2, 255);
-  delay(1000);         // Motor runnig time, 600 for Air Wick
+  delay(600);         // Motor runnig time, 600 for Air Wick
   ledcWrite(2, 0);
 }
 
