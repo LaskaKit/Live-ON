@@ -36,12 +36,23 @@
 //#define ESP32_DevKit
 //#define ESP32S3_DevKit
 
+//#define MOSFET_SHIELD
+#define FLIFFLOP_SHIELD
+
 #ifdef microESP
-  #define PIN_CH0     7     // Channel 0 GPIO on Laskakit microESP board with MOSFET Shield v1.1 and above
-  #define PIN_CH1     1     // Channel 1 GPIO on Laskakit microESP board with MOSFET Shield 
-  #define PIN_CH2     4     // Channel 2 GPIO on Laskakit microESP board with MOSFET Shield
   #define PIN_SDA     8     // SDA pin for I2C
   #define PIN_SCL     10    // SCL pin for I2C
+
+  #ifdef MOSFET_SHIELD
+    #define PIN_CH0     7     // Channel 0 GPIO on Laskakit microESP board with MOSFET Shield v1.1 and above
+    #define PIN_CH1     1     // Channel 1 GPIO on Laskakit microESP board with MOSFET Shield 
+    #define PIN_CH2     4     // Channel 2 GPIO on Laskakit microESP board with MOSFET Shield
+  #elif defined FLIFFLOP_SHIELD
+    #define DRIVE_PIN   0     // Drive pin Laskakit microESP board with Flip Flop Shield. Set to LOW to have CH1 ON & CH0 OFF and HIGH to have CH0 ON & CH1 OFF
+    #define RESET_PIN   1     // Reset shield, because it is not remember the state
+    #define CH0         HIGH  // Channel 0 will be ON when DRIVE_PIN is HIGH
+    #define CH1         LOW   // Channel 1 will be ON when DRIVE_PIN is LOW 
+  #endif
 
 #elif defined ESP32_DevKit
   #define PIN_CH0     34    // Channel 0 GPIO on Laskakit TBD
@@ -116,9 +127,15 @@ void doTheThings() {
   // Add the main tasks here
   Serial.println("Performing the main tasks...");
 
-  ledcWrite(2, 255);
-  delay(600);         // Motor runnig time, 600 for Air Wick
-  ledcWrite(2, 0);
+
+  #ifdef MOSFET_SHIELD
+    analogWrite(PIN_CH2, 255);    // Turn on the channel 2 (for example, Air Wick)
+    delay(600);                   // Motor runnig time, 600 for Air Wick
+    analogWrite(PIN_CH2, 255);    // Turn off the channel 2
+  #elif defined FLIFFLOP_SHIELD
+
+  #endif
+
 }
 
 const String getWifiSSID() {
@@ -415,12 +432,6 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Starting firmware for Zivy Obraz service");
   delay(1000);
-  ledcSetup(0, 1000, 8);
-  ledcAttachPin(PIN_CH0, 0);
-  ledcSetup(1, 1000, 8);
-  ledcAttachPin(PIN_CH1, 1);
-  ledcSetup(2, 1000, 8);
-  ledcAttachPin(PIN_CH2, 2);
 
   doTheThings(); // Call the function to perform the main tasks
 
